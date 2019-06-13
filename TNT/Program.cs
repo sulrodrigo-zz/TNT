@@ -6,22 +6,9 @@ namespace TNT
     {
         static void Main(string[] args)
         {
-            WriteHeader();
+            GetAppInfo();
+            GreetUser();
 
-            Console.WriteLine("Hey, Newbie! Tell me your name!");
-            string player = Console.ReadLine();
-            Console.Clear();
-            WriteHeader();
-            Console.WriteLine("Welcome {0}! Let's Play a Game...", player);
-            Console.WriteLine(@"   _________ _____  ___  _________   ");
-            Console.WriteLine(@"  |___   ___|| |\ \ | | |___   ___|  ");
-            Console.WriteLine(@"      | |    | | \ \| |     | |      ");
-            Console.WriteLine(@"      | |    | |  \ | |     | |      ");
-            Console.WriteLine(@"      | |    | |   \  |     | |      ");
-            Console.WriteLine(@"      |_|    |_|    \_|     |_|      ");
-            Console.WriteLine("");
-            Console.WriteLine("           :: THE GAME ::            ");
-            Console.WriteLine("");
 
             while (true) {
 
@@ -38,9 +25,7 @@ namespace TNT
 
                     if(!int.TryParse(input, out guess))
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Whoops... This is not a number...");
-                        Console.ResetColor();
+                        PrintColorMSG(ConsoleColor.Red, "Whoops... This is not a number...");
                         continue;
                     }
 
@@ -48,21 +33,14 @@ namespace TNT
 
                     if(guess != correctNumber)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                     Console.WriteLine("WRONG NUMBER! Try Again!");
-                        Console.ResetColor();
+                        PrintColorMSG(ConsoleColor.Red, "WRONG NUMBER! Try Again!");
                     }
-
-
                 }
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("RIGHT NUMBER! Well Done!");
-                Console.ResetColor();
+                PrintColorMSG(ConsoleColor.Yellow, "RIGHT NUMBER! Well Done!");
 
                 Console.WriteLine("Play Again? [Y or N]");
                 string answer = Console.ReadLine().ToUpper();
-
                 if(answer == "Y")
                 {
                     continue;
@@ -80,31 +58,41 @@ namespace TNT
             }
         }
 
-
-        public static void WriteHeader()
+        // Display App Info
+        static void GetAppInfo()
         {
             string AppName = "TNT";
-            string AppVersion = "0.0.2";
+            string AppVersion = "0.1.0";
             string AppAuthor = "Rodrigo Sul";
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("{0}: Version {1}. Created By: {2}", AppName, AppVersion, AppAuthor);
+            Console.WriteLine(@"   _________ _____  ___  _________   ");
+            Console.WriteLine(@"  |___   ___|| |\ \ | | |___   ___|  ");
+            Console.WriteLine(@"      | |    | | \ \| |     | |      ");
+            Console.WriteLine(@"      | |    | |  \ | |     | |      ");
+            Console.WriteLine(@"      | |    | |   \  |     | |      ");
+            Console.WriteLine(@"      |_|    |_|    \_|     |_|      ");
+            Console.WriteLine("");
+            Console.WriteLine("           :: THE GAME ::            ");
+            Console.WriteLine("");
             Console.ResetColor();
         }
 
+        //Ask user's Name and Greet
+        static void GreetUser()
+        {
+            Console.WriteLine("Hey, Newbie! Tell me your name!");
+            string player = Console.ReadLine();
+            Console.WriteLine("Welcome {0}! Let's Play a Game...", player);
+        }
 
-    //    Console.WriteLine("Enter a Number between 1 and 10");
-    //        int guess = Int32.Parse(Console.ReadLine());
-    //    Random random = new Random();
-    //    int result = random.Next(0, 10);
-    //        while(guess != result)
-    //        {
-    //            Console.WriteLine("Enter a Number between 1 and 10");
-    //        }
-
-    //Console.WriteLine("Congrats!");
-
-
+        static void PrintColorMSG(ConsoleColor color, string msg)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
 
     }
 }
